@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Valentine 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="backBtn" onclick="goBack()">← Back</button>
+
+<div class="card">
+
+    <h1>Happy Valentine’s Day 💕</h1>
+
+    <p class="intro">
+        This little page is just for you mama.
+        Every word here comes from my heart.
+    </p>
+
+    <!-- NAV BUTTONS -->
+    <div id="navButtons">
+
+        <button onclick="showSection('us')" class="animated-btn">Tap to see us</button>
+
+        <button onclick="unlockLoveLetter()" class="animated-btn">Love Letter 💌</button>
+
+        <button onclick="showSection('memories')" class="animated-btn">Our memories</button>
+
+        <button onclick="unlockMessage()" class="animated-btn">A message just for you</button>
+
+    </div>
+
+
+    <!-- US SECTION -->
+    <div id="us" class="hidden section">
+        <img src="Images/us.jpg">
+
+        <div class="sweet-box">
+            Every moment with you feels like home ❤️
+        </div>
+    </div>
+
+
+    <!-- MEMORIES -->
+    <div id="memories" class="hidden section">
+        <img src="Images/memory1.jpg">
+        <img src="Images/memory2.jpg">
+    </div>
+
+
+    <!-- MESSAGE -->
+    <div id="message" class="hidden section">
+        <p class="love-note glow-text">
+            You are my favorite person.
+            My peace.
+            My happiness.
+            My everything ❤️
+        </p>
+    </div>
+
+
+    <!-- LOVE LETTER -->
+    <div id="loveLetter" class="hidden section love-letter-mode">
+
+        <div class="letter-box">
+            My Love,
+
+            From the moment you walked into my life,
+            you changed everything.
+
+            You are my calm in chaos,
+            my smile when days feel heavy,
+            and my reason to keep growing.
+
+            I promise to love you loudly,
+            gently,
+            and endlessly.
+
+            Forever yours ❤️
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* MUSIC START AFTER FIRST CLICK */
+document.body.addEventListener("click", () => {
+    document.getElementById("bgMusic").play();
+}, { once:true });
+
+function showSection(id) {
+
+    document.getElementById("navButtons").style.display = "none";
+
+    document.querySelectorAll(".section").forEach(sec => {
+        sec.classList.remove("show");
+        sec.style.display = "none";
+    });
+
+    let target = document.getElementById(id);
+    target.style.display = "block";
+
+    setTimeout(() => {
+        target.classList.add("show");
+    }, 10);
+}
+
+function goBack() {
+
+    document.querySelectorAll(".section").forEach(sec => {
+        sec.classList.remove("show");
+        sec.style.display = "none";
+    });
+
+    document.getElementById("navButtons").style.display = "block";
+}
+
+function unlockMessage() {
+
+    let answer = prompt("Who is the best boyfriend in the world? 💕");
+
+    if(answer && answer.toLowerCase() === "my man"){
+        showSection("message");
+    }
+    else{
+        alert("Wrong answer cutie 😘");
+    }
+}
+
+function unlockLoveLetter(){
+
+    let answer = prompt("Where did we first talk? 💖");
+
+    if(answer && answer.toLowerCase() === "instagram"){
+        showSection("loveLetter");
+    }
+    else{
+        alert("Try again baby ❤️");
+    }
+}
+
+/* Falling Hearts */
+
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random()*100+"vw";
+    heart.style.animationDuration = (Math.random()*3+3)+"s";
+
+    document.querySelector(".hearts").appendChild(heart);
+
+    setTimeout(()=>{ heart.remove(); },6000);
+}
+
+setInterval(createHeart,500);
+
+</script>
+
+</body>
+</html>
