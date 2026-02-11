@@ -1,222 +1,214 @@
-body{
-    margin:0;
-    font-family:'Playfair Display', serif;
-    background:linear-gradient(to bottom,#fff8f6,#fce6ef);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    overflow-x:hidden;
-    animation:softPulse 8s infinite alternate;
+/* ==========================================================================
+   1. GLOBAL STYLES & BASE
+   ========================================================================== */
+body {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(to bottom, #fff8f6, #fce6ef);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    animation: softPulse 8s infinite alternate;
 }
 
-/* Soft background glow pulse */
-@keyframes softPulse{
-    0%{background-color:#fff8f6;}
-    100%{background-color:#fdeaf2;}
+h1 {
+    color: #c94f7c;
+    font-family: 'Dancing Script', cursive;
+    font-size: 38px;
 }
 
-/* INTRO SCREEN */
-#introScreen{
-    position:fixed;
-    inset:0;
-    background:linear-gradient(to bottom,#fff8f6,#fce6ef);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    z-index:10;
-    text-align:center;
-}
-
-.textsConfig{
-     color:#7f7f7f;
-    margin-bottom:10px;
-    font-style:italic;
-}
-
-#enterBtn{
-    padding:12px 25px;
-    border:none;
-    border-radius:7.5px;
-    background:#d05481;
-    box-shadow:0 0 25px rgba(201,79,124,0.2);
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-}
-
-/* CARD */
-.card{
-    background:white;
-    opacity: .85;
-    padding:25px;
-    max-width:400px;
-    width:90%;
-    border-radius:7.5px;
-    box-shadow:0 10px 35px rgba(122,44,77,.15);
-    text-align:center;
-    position:relative;
-    z-index:2;
-}
-
-/* HEADINGS */
-h1{
-    color:#c94f7c;
-    font-family:'Dancing Script',cursive;
-    font-size:38px;
-}
-
-.intro{
-    color:#7a2c4d;
-    margin-bottom:20px;
-    font-style:italic;
-}
-
-/* BUTTONS */
-.animated-btn{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:none;
+img {
+    width: 100%;
     border-radius: 7.5px;
-    background:linear-gradient(165deg,#d05481,#e36291);
-    /*background:#d05481;*/
-    box-shadow:0 0 25px rgba(201,79,124,0.2);
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-    transition:all 0.3s ease;
+    margin-bottom: 12px;
 }
 
-.animated-btn:hover{
-    background:#c14d77;
+/* ==========================================================================
+   2. INTRO & OVERLAY SCREENS
+   ========================================================================== */
+#introScreen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to bottom, #fff8f6, #fce6ef);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+    text-align: center;
 }
 
-.animated-btn:active{
-    transform:scale(0.95);
+.textsConfig {
+    color: #7f7f7f;
+    margin-bottom: 10px;
+    font-style: italic;
 }
 
-/* SECTIONS */
-.section{
-    opacity:0;
-    transform:translateY(15px);
-    transition:all 0.6s ease;
+.intro {
+    color: #7a2c4d;
+    margin-bottom: 20px;
+    font-style: italic;
 }
 
-.section.show{
-    opacity:1;
-    transform:translateY(0);
-    transition:all 0.6s ease;
+/* ==========================================================================
+   3. THE CARD CONTAINER
+   ========================================================================== */
+.card {
+    background: white;
+    opacity: 0.85;
+    padding: 25px;
+    max-width: 400px;
+    width: 90%;
+    border-radius: 7.5px;
+    box-shadow: 0 10px 35px rgba(122, 44, 77, 0.15);
+    text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
-.hidden{
-    display:none;
+/* ==========================================================================
+   4. BUTTON STYLES
+   ========================================================================== */
+#enterBtn, 
+.animated-btn, 
+#backBtn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 7.5px;
+    background: #d05481;
+    box-shadow: 0 0 25px rgba(201, 79, 124, 0.2);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* IMAGES */
-img{
-    width:100%;
-    border-radius:7.5px;
-    margin-bottom:12px;
+.animated-btn {
+    width: 100%;
+    margin: 10px 0;
+    background: linear-gradient(165deg, #d05481, #e36291);
 }
 
-.sweet-box{
-background:#fff8f6;
-padding:10px;
-border-radius:7.5px;
-color:#7a2c4d;
-font-style:italic;
- box-shadow:0 0 25px rgba(201,79,124,0.2);
+.animated-btn:hover {
+    background: #c14d77;
 }
 
-.love-note{
-font-size:24px;
-font-family: 'Dancing Script',cursive;
-line-height:1.5;
-color:#7a2c4d;
+.animated-btn:active {
+    transform: scale(0.95);
 }
 
-.glow-text{
-text-shadow:0 0 15px rgba(242, 34, 121, 0.808);
+.voice-btn {
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 7.5px;
+    background: #7a2c4d;
+    color: white;
+    cursor: pointer;
 }
 
-.voice-btn{
-margin-top:20px;
-padding:10px;
-border:none;
-border-radius:7.5px;
-background:#7a2c4d;
-color:white;
-cursor:pointer;
+#backBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    z-index: 3;
 }
 
-/* LOVE LETTER */
-.letter-box{
-    background:#fff8f6;
-    padding:15px;
-    border-radius:7.5px;
-    font-family:'Dancing Script',cursive;
-    font-size:22px;
-    line-height:1.6;
-    color:#7a2c4d;
-    box-shadow:0 0 25px rgba(201,79,124,0.2);
+/* ==========================================================================
+   5. CONTENT SECTIONS & TYPOGRAPHY
+   ========================================================================== */
+.section {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.6s ease;
 }
 
-/* BACK BUTTON */
-#backBtn{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    padding:10px 15px;
-    border-radius:7.5px;
-    border:none;
-    background:#d05481;
-    box-shadow:0 0 25px rgba(201,79,124,0.2);
-    color:white;
-    cursor:pointer;
-    z-index:3;
-    display:none;
+.section.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Falling custom hearts */
-.hearts{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    z-index:1;
+.hidden {
+    display: none;
 }
 
-.heart{
-    position:absolute;
-    top:-50px;
-    width:80px;
-    height:45px;
-    animation:fall linear forwards;
+.letter-box, 
+.sweet-box {
+    background: #fff8f6;
+    padding: 15px;
+    border-radius: 7.5px;
+    color: #7a2c4d;
+    box-shadow: 0 0 25px rgba(201, 79, 124, 0.2);
 }
 
-@keyframes fall{
-    to{
-        transform:translateY(100vh);
-        opacity:0;
+.letter-box {
+    font-family: 'Dancing Script', cursive;
+    font-size: 22px;
+    line-height: 1.6;
+}
+
+.love-note {
+    font-size: 24px;
+    font-family: 'Dancing Script', cursive;
+    line-height: 1.5;
+    color: #7a2c4d;
+}
+
+.glow-text {
+    text-shadow: 0 0 15px rgba(242, 34, 121, 0.808);
+}
+
+/* ==========================================================================
+   6. VISUAL EFFECTS (Hearts & Confetti)
+   ========================================================================== */
+.hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.heart {
+    position: absolute;
+    top: -50px;
+    width: 80px;
+    height: 45px;
+    animation: fall linear forwards;
+}
+
+.confetti {
+    position: fixed;
+    top: -10px;
+    width: 8px;
+    height: 12px;
+    animation: confettiFall linear forwards;
+    z-index: 999;
+}
+
+/* ==========================================================================
+   7. ANIMATIONS
+   ========================================================================== */
+@keyframes softPulse {
+    0%   { background-color: #fff8f6; }
+    100% { background-color: #fdeaf2; }
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
     }
 }
 
-/* Confetti */
-.confetti{
-position:fixed;
-top:-10px;
-width:8px;
-height:12px;
-animation:confettiFall linear forwards;
-}
-
-@keyframes confettiFall{
-to{
-transform:translateY(100vh) rotate(720deg);
-opacity:0;
-}
+@keyframes confettiFall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
 }
