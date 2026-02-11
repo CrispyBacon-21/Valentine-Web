@@ -6,172 +6,189 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<div id="introScreen">
+    <h1>For A Special Lady ❤️</h1>
+    <p class="textsConfig">
+        Tap to begin
+    </p>
+    <button id="enterBtn" onclick="enterSite()">Enter</button>
+</div>
+
+
 <div class="hearts"></div>
+<div class="confetti-container"></div>
 
 <!-- Background Music -->
 <audio id="bgMusic" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Voice Message -->
+<audio id="voiceMessage">
+    <source src="voice.mp3" type="audio/mpeg">
+</audio>
+
 <button id="backBtn" onclick="goBack()">← Back</button>
 
 <div class="card">
 
-    <h1>Happy Valentine’s Day 💕</h1>
+<h1>Happy Valentine’s Day 💕</h1>
 
-    <p class="intro">
-        This little page is just for you mama.
-        Every word here comes from my heart.
+<p class="intro">
+This little page is just for you mama.
+Every word here comes from my heart.
+</p>
+
+<div id="navButtons">
+
+<button onclick="showSection('us')" class="animated-btn">Tap to see us</button>
+
+<button onclick="unlockLoveLetter()" class="animated-btn">Love Letter 💌</button>
+
+<button onclick="showSection('memories')" class="animated-btn">Our memories</button>
+
+<button onclick="unlockMessage()" class="animated-btn">A message just for you</button>
+
+</div>
+
+<!-- US -->
+<div id="us" class="hidden section">
+<img src="Images/us.jpg">
+<div class="sweet-box">
+<p> Every moment with you feels like destiny ❤️</p>
+</div>
+</div>
+
+<!-- MEMORIES -->
+<div id="memories" class="hidden section">
+<img src="Images/memory1.jpg">
+<img src="Images/memory2.jpg">
+</div>
+
+<!-- MESSAGE -->
+<div id="message" class="hidden section">
+    <button class="voice-btn" onclick="playVoice()">▶ Play My Voice</button>
+    <p class="love-note glow-text">
+        You are my peace.
+        My happiness.
+        My greatest blessing ❤️
     </p>
+</div>
 
-    <!-- NAV BUTTONS -->
-    <div id="navButtons">
+<!-- LOVE LETTER -->
+<div id="loveLetter" class="hidden section love-letter-mode">
 
-        <button onclick="showSection('us')" class="animated-btn">Tap to see us</button>
+<div class="floating-hearts"></div>
 
-        <button onclick="unlockLoveLetter()" class="animated-btn">Love Letter 💌</button>
+<div class="letter-box">
+My Love,
 
-        <button onclick="showSection('memories')" class="animated-btn">Our memories</button>
+From the moment you came into my life,
+everything became softer, brighter, better.
 
-        <button onclick="unlockMessage()" class="animated-btn">A message just for you</button>
+You are the calm in my chaos.
+The smile I never want to lose.
 
-    </div>
+I choose you.
+Every single time.
+Forever ❤️
+</div>
 
-
-    <!-- US SECTION -->
-    <div id="us" class="hidden section">
-        <img src="Images/us.jpg">
-
-        <div class="sweet-box">
-            Every moment with you feels like home ❤️
-        </div>
-    </div>
-
-
-    <!-- MEMORIES -->
-    <div id="memories" class="hidden section">
-        <img src="Images/memory1.jpg">
-        <img src="Images/memory2.jpg">
-    </div>
-
-
-    <!-- MESSAGE -->
-    <div id="message" class="hidden section">
-        <p class="love-note glow-text">
-            You are my favorite person.
-            My peace.
-            My happiness.
-            My everything ❤️
-        </p>
-    </div>
-
-
-    <!-- LOVE LETTER -->
-    <div id="loveLetter" class="hidden section love-letter-mode">
-
-        <div class="letter-box">
-            My Love,
-
-            From the moment you walked into my life,
-            you changed everything.
-
-            You are my calm in chaos,
-            my smile when days feel heavy,
-            and my reason to keep growing.
-
-            I promise to love you loudly,
-            gently,
-            and endlessly.
-
-            Forever yours ❤️
-        </div>
-
-    </div>
+</div>
 
 </div>
 
 <script>
 
-/* MUSIC START AFTER FIRST CLICK */
-document.body.addEventListener("click", () => {
+/* ENTER SITE */
+function enterSite(){
+    document.getElementById("introScreen").style.display="none";
     document.getElementById("bgMusic").play();
-}, { once:true });
-
-function showSection(id) {
-
-    document.getElementById("navButtons").style.display = "none";
-
-    document.querySelectorAll(".section").forEach(sec => {
-        sec.classList.remove("show");
-        sec.style.display = "none";
-    });
-
-    let target = document.getElementById(id);
-    target.style.display = "block";
-
-    setTimeout(() => {
-        target.classList.add("show");
-    }, 10);
 }
 
-function goBack() {
+/* SHOW SECTIONS */
+function showSection(id){
 
-    document.querySelectorAll(".section").forEach(sec => {
+    document.getElementById("navButtons").style.display="none";
+    document.getElementById("backBtn").style.display="block";
+
+    document.querySelectorAll(".section").forEach(sec=>{
         sec.classList.remove("show");
-        sec.style.display = "none";
+        sec.style.display="none";
     });
 
-    document.getElementById("navButtons").style.display = "block";
+    let target=document.getElementById(id);
+    target.style.display="block";
+
+    setTimeout(()=>{target.classList.add("show");},10);
 }
 
-function unlockMessage() {
+/* BACK TO MENU */
+function goBack(){
 
-    let answer = prompt("Who is the best boyfriend in the world? 💕 awnser is my man");
+    document.querySelectorAll(".section").forEach(sec=>{
+        sec.classList.remove("show");
+        sec.style.display="none";
+    });
 
-    if(answer && answer.toLowerCase() === "my man"){
-        showSection("message");
+    document.getElementById("navButtons").style.display="block";
+    document.getElementById("backBtn").style.display="none";
+}
+
+/* CONFETTI */
+function launchConfetti(){
+for(let i=0;i<80;i++){
+let conf=document.createElement("div");
+conf.classList.add("confetti");
+conf.style.left=Math.random()*100+"vw";
+conf.style.backgroundColor=Math.random()>0.5?"#ff004f":"#ff5fa2";
+conf.style.animationDuration=(Math.random()*3+2)+"s";
+document.querySelector(".confetti-container").appendChild(conf);
+
+setTimeout(()=>{conf.remove();},5000);
+}
+}
+
+/* UNLOCKS */
+function unlockLoveLetter(){
+    let answer=prompt("Where did we first talk? 💖");
+    if(answer && answer.toLowerCase()==="instagram"){
+        showSection("loveLetter");
+        launchConfetti();
+    }else{
+        alert("Try again ❤️");
     }
-    else{
+}
+
+function unlockMessage(){
+    let answer=prompt("Who is the best boyfriend in the world? 💕");
+    if(answer && answer.toLowerCase()==="my man"){
+        showSection("message");
+        launchConfetti();
+    }else{
         alert("Wrong answer cutie 😘");
     }
 }
 
-function unlockLoveLetter(){
-
-    let answer = prompt("Where did we first talk? 💖 awnser is instagram");
-
-    if(answer && answer.toLowerCase() === "instagram"){
-        showSection("loveLetter");
-    }
-    else{
-        alert("Try again baby ❤️");
-    }
-}
-
-/* Falling Hearts */
-
+/* CUSTOM FALLING IMAGE HEARTS */
 function createHeart(){
-    const heart = document.createElement("div");
+    const heart=document.createElement("img");
+    heart.src="Images/FallingHeart.jpg";  /* Put your custom image here */
     heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100+"vw";
-    heart.style.animationDuration = (Math.random()*3+3)+"s";
-
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(Math.random()*3+4)+"s";
     document.querySelector(".hearts").appendChild(heart);
-
-    setTimeout(()=>{ heart.remove(); },6000);
+    setTimeout(()=>heart.remove(),7000);
 }
 
-setInterval(createHeart,500);
+setInterval(createHeart,800);
 
 </script>
 
 </body>
 </html>
-
