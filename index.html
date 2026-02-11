@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Valentine 💖</title>
+
+    <!-- This connects our CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Makes it mobile-friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+    <div class="card">
+        <h1>Happy Valentine’s Day 💕</h1>
+
+        <p class="intro">
+            This little page is just for you.
+            Every word here comes from my heart.
+        </p>
+
+        <button onclick="showSection('us')">Tap to see us</button>
+        <button onclick="showSection('memories')">Our memories</button>
+        <button onclick="showSection('message')">A message just for you</button>
+
+        <!-- Hidden sections -->
+        <div id="us" class="hidden">
+            <img src="us.jpg" alt="Us together">
+        </div>
+
+        <div id="memories" class="hidden">
+            <img src="memory1.jpg" alt="Memory">
+            <img src="memory2.jpg" alt="Memory">
+        </div>
+
+        <div id="message" class="hidden">
+            <p class="love-note">
+                You mean more to me than words can explain.
+                Thank you for being you. ❤️
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.hidden').forEach(section => {
+                section.style.display = "none";
+            });
+            document.getElementById(id).style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
