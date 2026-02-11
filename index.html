@@ -173,18 +173,36 @@
             }
         }
 
-        let currentUnlockType = ""; // To track which section we are unlocking
+ let currentUnlockType = "";
 
 function openPrompt(question, type) {
     currentUnlockType = type;
     document.getElementById("promptTitle").innerText = question;
-    document.getElementById("promptInput").value = ""; // Clear old text
-    document.getElementById("customPrompt").style.display = "flex";
-    document.getElementById("promptInput").focus();
+    document.getElementById("promptInput").value = ""; 
+    
+    // Show modal without focusing input (keyboard stays hidden)
+    const modal = document.getElementById("customPrompt");
+    modal.style.display = "flex";
+    modal.style.opacity = "0";
+    setTimeout(() => { modal.style.opacity = "1"; }, 10);
 }
 
 function closePrompt() {
-    document.getElementById("customPrompt").style.display = "none";
+    const modal = document.getElementById("customPrompt");
+    modal.style.opacity = "0";
+    setTimeout(() => { modal.style.display = "none"; }, 400);
+}
+
+// Custom Error Message Function
+function showError(message) {
+    const toast = document.getElementById("errorToast");
+    toast.innerText = message;
+    toast.classList.add("show");
+    
+    // Automatically hide after 2.5 seconds
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
 }
 
 function submitPrompt() {
@@ -196,20 +214,29 @@ function submitPrompt() {
             launchConfetti();
             closePrompt();
         } else {
-            alert("Try again ❤️");
+            triggerErrorEffect();
+            showError("Try again ❤️"); // Custom error instead of alert
         }
     } 
-    
     else if (currentUnlockType === "message") {
         if (answer === "my man") {
             showSection("message");
             launchConfetti();
             closePrompt();
         } else {
-            alert("Wrong answer cutie 😘");
+            triggerErrorEffect();
+            showError("Wrong answer, cutie 😘"); // Custom error instead of alert
         }
     }
 }
+
+function triggerErrorEffect() {
+            let inputField = document.getElementById("promptInput");
+            inputField.classList.add("error-glow");
+            setTimeout(() => {
+                inputField.classList.remove("error-glow");
+            }, 500);
+        }
 
 // Update your button clicks to use the new prompt
 function unlockLoveLetter() {
@@ -230,15 +257,17 @@ document.getElementById("promptInput").addEventListener("keypress", function(eve
         function playVoice() { document.getElementById("voiceMessage").play(); }
     </script>
 
+    <div id="errorToast">Try again, cutie ❤️</div>
+
     <div id="customPrompt">
-    <div class="prompt-content">
-        <h2 id="promptTitle">Question</h2>
-        <input type="text" id="promptInput" placeholder="Type here...">
-        <div class="prompt-btns">
-            <button class="animated-btn" style="margin:0; width: auto;" onclick="submitPrompt()">Submit</button>
-            <button class="animated-btn" style="margin:0; width: auto; background: #7a2c4d;" onclick="closePrompt()">Cancel</button>
+        <div class="prompt-content">
+            <h2 id="promptTitle">Question</h2>
+            <input type="text" id="promptInput" placeholder="Tap here to type...">
+            <div class="prompt-btns">
+                <button class="animated-btn" style="margin:0; width: auto;" onclick="submitPrompt()">Submit</button>
+                <button class="animated-btn" style="margin:0; width: auto; background: #7a2c4d;" onclick="closePrompt()">Cancel</button>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>
