@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>My Valentine 💖</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Dancing+Script:wght@600&family=Caveat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -69,47 +69,83 @@
     </div>
 
     <script>
-        /* 1. HEART SYSTEM (Starts on Load) */
+        /* 1. HEART SYSTEM */
         function createHeart() {
             const heartContainer = document.querySelector(".hearts");
             if (!heartContainer) return;
-
+            const wrapper = document.createElement("div");
+            wrapper.classList.add("heart-wrapper");
             const heart = document.createElement("img");
             heart.src = "Images/FallingHeart.jpg"; 
-            heart.classList.add("heart");
-            
-            // Randomize position and size
-            const size = Math.random() * (60 - 30) + 30; // Random size between 30px-60px
+            heart.classList.add("heart-img");
+            const size = Math.random() * (60 - 20) + 20; 
             heart.style.width = size + "px";
-            heart.style.height = "auto"; 
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-            heart.style.opacity = Math.random() * (1 - 0.6) + 0.6; // Slight transparency variety
-
-            heartContainer.appendChild(heart);
-            setTimeout(() => heart.remove(), 7000);
+            wrapper.style.left = Math.random() * 100 + "vw";
+            const fallDuration = Math.random() * 3 + 4;
+            const swayDuration = Math.random() * 1 + 1;
+            wrapper.style.animationDuration = `${fallDuration}s`;
+            heart.style.animationDuration = `${swayDuration}s`;
+            wrapper.appendChild(heart);
+            heartContainer.appendChild(wrapper);
+            setTimeout(() => { wrapper.remove(); }, fallDuration * 1000);
         }
 
-        // Start hearts immediately when the window loads
-        window.onload = function() {
-            setInterval(createHeart, 800); // Created slightly faster for better effect
-        };
+        /* 2. HEART BURST EFFECT */
+        function createBurst() {
+            for (let i = 0; i < 20; i++) {
+                const burst = document.createElement("img");
+                burst.src = "Images/FallingHeart.jpg";
+                burst.classList.add("burst-heart");
+                
+                // Random directions for the explosion
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 200 + 100;
+                const tx = Math.cos(angle) * distance + "px";
+                const ty = Math.sin(angle) * distance + "px";
+                const rot = Math.random() * 360 + "deg";
 
-        /* 2. NAVIGATION LOGIC */
+                burst.style.setProperty('--tx', tx);
+                burst.style.setProperty('--ty', ty);
+                burst.style.setProperty('--rot', rot);
+                burst.style.width = (Math.random() * 30 + 20) + "px";
+
+                document.body.appendChild(burst);
+                setTimeout(() => burst.remove(), 1200);
+            }
+        }
+
+        /* 3. ENTER SITE (Music + Fullscreen + Burst) */
         function enterSite() {
+            // Fullscreen trigger
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            }
+
+            // Burst Effect
+            createBurst();
+
+            // Hide intro and play music
             document.getElementById("introScreen").style.display = "none";
             document.getElementById("bgMusic").play();
         }
 
+        window.onload = function() {
+            setInterval(createHeart, 800);
+        };
+
+        /* NAVIGATION & INTERACTION */
         function showSection(id) {
             document.getElementById("navButtons").style.display = "none";
             document.getElementById("backBtn").style.display = "block";
-            
             document.querySelectorAll(".section").forEach(sec => {
                 sec.classList.remove("show");
                 sec.style.display = "none";
             });
-
             let target = document.getElementById(id);
             target.style.display = "block";
             setTimeout(() => { target.classList.add("show"); }, 10);
@@ -124,7 +160,6 @@
             document.getElementById("backBtn").style.display = "none";
         }
 
-        /* 3. INTERACTIVE FEATURES */
         function launchConfetti() {
             const container = document.querySelector(".confetti-container");
             for(let i=0; i<80; i++) {
@@ -138,29 +173,72 @@
             }
         }
 
-        function unlockLoveLetter() {
-            let answer = prompt("Where did we first talk? 💖");
-            if(answer && answer.toLowerCase() === "instagram") {
-                showSection("loveLetter");
-                launchConfetti();
-            } else {
-                alert("Try again ❤️");
-            }
-        }
+        let currentUnlockType = ""; // To track which section we are unlocking
 
-        function unlockMessage() {
-            let answer = prompt("Who is the best boyfriend in the world? 💕");
-            if(answer && answer.toLowerCase() === "my man") {
-                showSection("message");
-                launchConfetti();
-            } else {
-                alert("Wrong answer cutie 😘");
-            }
-        }
+function openPrompt(question, type) {
+    currentUnlockType = type;
+    document.getElementById("promptTitle").innerText = question;
+    document.getElementById("promptInput").value = ""; // Clear old text
+    document.getElementById("customPrompt").style.display = "flex";
+    document.getElementById("promptInput").focus();
+}
 
-        function playVoice() {
-            document.getElementById("voiceMessage").play();
+function closePrompt() {
+    document.getElementById("customPrompt").style.display = "none";
+}
+
+function submitPrompt() {
+    let answer = document.getElementById("promptInput").value.toLowerCase().trim();
+    
+    if (currentUnlockType === "letter") {
+        if (answer === "instagram") {
+            showSection("loveLetter");
+            launchConfetti();
+            closePrompt();
+        } else {
+            alert("Try again ❤️");
         }
+    } 
+    
+    else if (currentUnlockType === "message") {
+        if (answer === "my man") {
+            showSection("message");
+            launchConfetti();
+            closePrompt();
+        } else {
+            alert("Wrong answer cutie 😘");
+        }
+    }
+}
+
+// Update your button clicks to use the new prompt
+function unlockLoveLetter() {
+    openPrompt("Where did we first talk? 💖", "letter");
+}
+
+function unlockMessage() {
+    openPrompt("Who is the best boyfriend in the world? 💕", "message");
+}
+
+// Allow "Enter" key to submit the prompt
+document.getElementById("promptInput").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        submitPrompt();
+    }
+});
+
+        function playVoice() { document.getElementById("voiceMessage").play(); }
     </script>
+
+    <div id="customPrompt">
+    <div class="prompt-content">
+        <h2 id="promptTitle">Question</h2>
+        <input type="text" id="promptInput" placeholder="Type here...">
+        <div class="prompt-btns">
+            <button class="animated-btn" style="margin:0; width: auto;" onclick="submitPrompt()">Submit</button>
+            <button class="animated-btn" style="margin:0; width: auto; background: #7a2c4d;" onclick="closePrompt()">Cancel</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
