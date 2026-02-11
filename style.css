@@ -262,7 +262,7 @@ img {
 
 .prompt-content {
     background: white;
-    background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('Images/PromptBG.jpg'); /* ADD YOUR IMAGE HERE */
+    background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('Images/background.jpg'); /* ADD YOUR IMAGE HERE */
     background-size: cover;
     background-position: center;
     padding: 30px;
@@ -297,3 +297,40 @@ img {
 
 /* Adjusting the input text size for better reading */
 #promptInput { font-size: 16px; }
+
+/* Custom Error Notification (Toast) */
+#errorToast {
+    position: fixed;
+    top: -100px; /* Hidden above screen */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #7a2c4d;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 7.5px;
+    z-index: 3000; /* Above the prompt */
+    font-style: normal;
+    font-size: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+    opacity: 0;
+}
+
+#errorToast.show {
+    top: 40px; /* Slips down into view */
+    opacity: 1;
+}
+
+/* Modal Fade-in */
+#customPrompt {
+    display: none;
+    transition: opacity 0.4s ease;
+}
+
+/* Red glow effect for wrong answers */
+.error-glow {
+    border: 2px solid #ff4d4d !important;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.6);
+    transform: translateX(5px); /* Tiny shake effect */
+    transition: all 0.1s ease;
+}
