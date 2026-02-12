@@ -9,36 +9,48 @@
 </head>
 
 <body>
-
+    <!-- ===== VISUAL EFFECTS CONTAINERS ===== -->
     <div class="hearts"></div>
     <div class="confetti-container"></div>
 
+    <!-- ===== INTRO SCREEN ===== -->
     <div id="introScreen">
         <h1>For A Special Lady ❤️</h1>
         <p class="textsConfig">Tap to begin</p>
         <button id="enterBtn" onclick="enterSite()">Enter</button>
     </div>
 
+    <!-- ===== AUDIO FILES ===== -->
     <audio id="bgMusic" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
+
     <audio id="voiceMessage">
         <source src="voice.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- ===== BACK BUTTON ===== -->
     <button id="backBtn" onclick="goBack()">← Back</button>
 
+    <!-- ===== MAIN CARD ===== -->
     <div class="card">
-        <h1>Happy Valentine’s Day 💕</h1>
+        <h1>Happy Valentine's Day 💕</h1>
         <p class="intro">This little page is just for you mama. Every word here comes from my heart.</p>
+        <p id="timeTogether"></p>
 
+        <!-- Navigation Buttons -->
         <div id="navButtons">
             <button onclick="showSection('us')" class="animated-btn">Tap to see us</button>
             <button onclick="unlockLoveLetter()" class="animated-btn">Love Letter 💌</button>
             <button onclick="showSection('memories')" class="animated-btn">Our memories</button>
             <button onclick="unlockMessage()" class="animated-btn">A message just for you</button>
+            <button onclick="showSection('distance')" class="animated-btn">Even if you leave...</button>
+            <button onclick="finalScene()" class="animated-btn">One Last Thing...</button>
         </div>
 
+        <!-- ===== CONTENT SECTIONS ===== -->
+        
+        <!-- Us Section -->
         <div id="us" class="hidden section">
             <img src="Images/us.jpg" alt="Us">
             <div class="sweet-box">
@@ -46,11 +58,20 @@
             </div>
         </div>
 
+        <!-- Love Letter Section -->
+        <div id="loveLetter" class="hidden section">
+            <div class="letter-box">
+                <p id="typedLetter"></p>
+            </div>
+        </div>
+
+        <!-- Memories Section -->
         <div id="memories" class="hidden section">
             <img src="Images/memory1.jpg" alt="Memory 1">
             <img src="Images/memory2.jpg" alt="Memory 2">
         </div>
 
+        <!-- Voice Message Section -->
         <div id="message" class="hidden section">
             <button class="voice-btn" onclick="playVoice()">▶ Play My Voice</button>
             <p class="love-note glow-text">
@@ -58,46 +79,91 @@
             </p>
         </div>
 
-        <div id="loveLetter" class="hidden section">
-            <div class="letter-box">
-                My Love,<br><br>
-                From the moment you came into my life, everything became softer, brighter, better.<br><br>
-                You are the calm in my chaos. The smile I never want to lose.<br><br>
-                I choose you. Every single time. Forever ❤️
+        <!-- Distance Section -->
+        <div id="distance" class="hidden section">
+            <div class="sweet-box">
+                <p class="love-note">
+                    They say distance changes feelings.
+                    <br><br>
+                    I think it just proves which ones were real.
+                    <br><br>
+                    So if one day you miss me...
+                    I hope you remember this page.
+                </p>
+            </div>
+        </div>
+
+        <!-- Final Scene Section -->
+        <div id="finalScene" class="hidden section">
+            <div class="sweet-box">
+                <p id="finalText" class="love-note"></p>
             </div>
         </div>
     </div>
 
+    <!-- ===== ERROR TOAST ===== -->
+    <div id="errorToast">Try again, cutie ❤️</div>
+
+    <!-- ===== CUSTOM PROMPT MODAL ===== -->
+    <div id="customPrompt">
+        <div class="prompt-content">
+            <h2 id="promptTitle">Question</h2>
+            <input type="text" id="promptInput" placeholder="Tap here to type...">
+            <div class="prompt-btns">
+                <button class="animated-btn" onclick="submitPrompt()">Submit</button>
+                <button class="animated-btn" style="background: #7a2c4d;" onclick="closePrompt()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
     <script>
-        /* 1. HEART SYSTEM */
+        // =================================================================
+        // CONFIGURATION
+        // =================================================================
+        const CONFIG = {
+            startDate: "2022-01-01", // Change to your actual date
+            heartInterval: 800,
+            confettiCount: 80,
+            burstHeartCount: 20
+        };
+
+        // =================================================================
+        // HEART SYSTEM
+        // =================================================================
         function createHeart() {
             const heartContainer = document.querySelector(".hearts");
             if (!heartContainer) return;
+
             const wrapper = document.createElement("div");
             wrapper.classList.add("heart-wrapper");
+
             const heart = document.createElement("img");
-            heart.src = "Images/FallingHeart.jpg"; 
+            heart.src = "Images/FallingHeart.jpg";
             heart.classList.add("heart-img");
-            const size = Math.random() * (60 - 20) + 20; 
+
+            const size = Math.random() * 40 + 20;
             heart.style.width = size + "px";
             wrapper.style.left = Math.random() * 100 + "vw";
+
             const fallDuration = Math.random() * 3 + 4;
             const swayDuration = Math.random() * 1 + 1;
+
             wrapper.style.animationDuration = `${fallDuration}s`;
             heart.style.animationDuration = `${swayDuration}s`;
+
             wrapper.appendChild(heart);
             heartContainer.appendChild(wrapper);
-            setTimeout(() => { wrapper.remove(); }, fallDuration * 1000);
+
+            setTimeout(() => wrapper.remove(), fallDuration * 1000);
         }
 
-        /* 2. HEART BURST EFFECT */
         function createBurst() {
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < CONFIG.burstHeartCount; i++) {
                 const burst = document.createElement("img");
                 burst.src = "Images/FallingHeart.jpg";
                 burst.classList.add("burst-heart");
-                
-                // Random directions for the explosion
+
                 const angle = Math.random() * Math.PI * 2;
                 const distance = Math.random() * 200 + 100;
                 const tx = Math.cos(angle) * distance + "px";
@@ -114,41 +180,87 @@
             }
         }
 
-        /* 3. ENTER SITE (Music + Fullscreen + Burst) */
+        // =================================================================
+        // CONFETTI SYSTEM
+        // =================================================================
+        function launchConfetti() {
+            const container = document.querySelector(".confetti-container");
+            for (let i = 0; i < CONFIG.confettiCount; i++) {
+                const conf = document.createElement("div");
+                conf.classList.add("confetti");
+                conf.style.left = Math.random() * 100 + "vw";
+                conf.style.backgroundColor = Math.random() > 0.5 ? "#ff004f" : "#ff5fa2";
+                conf.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                container.appendChild(conf);
+                setTimeout(() => conf.remove(), 5000);
+            }
+        }
+
+        // =================================================================
+        // TYPEWRITER EFFECT
+        // =================================================================
+        function typeLetter(text, elementId, speed = 40) {
+            let i = 0;
+            const el = document.getElementById(elementId);
+            el.innerHTML = "";
+
+            function typing() {
+                if (i < text.length) {
+                    el.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+            typing();
+        }
+
+        // =================================================================
+        // TIME CALCULATOR
+        // =================================================================
+        function updateTime() {
+            const startDate = new Date(CONFIG.startDate);
+            const now = new Date();
+            const diff = now - startDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            document.getElementById("timeTogether").innerText =
+                `It's been ${days} days since we started this story ❤️`;
+        }
+
+        // =================================================================
+        // SITE ENTRY
+        // =================================================================
         function enterSite() {
-            // Fullscreen trigger
+            // Fullscreen request
             const elem = document.documentElement;
             if (elem.requestFullscreen) {
                 elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) { /* Safari */
+            } else if (elem.webkitRequestFullscreen) {
                 elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) { /* IE11 */
+            } else if (elem.msRequestFullscreen) {
                 elem.msRequestFullscreen();
             }
 
-            // Burst Effect
             createBurst();
-
-            // Hide intro and play music
             document.getElementById("introScreen").style.display = "none";
             document.getElementById("bgMusic").play();
         }
 
-        window.onload = function() {
-            setInterval(createHeart, 800);
-        };
-
-        /* NAVIGATION & INTERACTION */
+        // =================================================================
+        // NAVIGATION
+        // =================================================================
         function showSection(id) {
             document.getElementById("navButtons").style.display = "none";
             document.getElementById("backBtn").style.display = "block";
+
             document.querySelectorAll(".section").forEach(sec => {
                 sec.classList.remove("show");
                 sec.style.display = "none";
             });
-            let target = document.getElementById(id);
+
+            const target = document.getElementById(id);
             target.style.display = "block";
-            setTimeout(() => { target.classList.add("show"); }, 10);
+            setTimeout(() => target.classList.add("show"), 10);
         }
 
         function goBack() {
@@ -156,119 +268,172 @@
                 sec.classList.remove("show");
                 sec.style.display = "none";
             });
+
             document.getElementById("navButtons").style.display = "block";
             document.getElementById("backBtn").style.display = "none";
+
+            // Reset background
+            document.body.style.background = "";
+            document.body.style.transition = "background 1s ease";
         }
 
-        function launchConfetti() {
-            const container = document.querySelector(".confetti-container");
-            for(let i=0; i<80; i++) {
-                let conf = document.createElement("div");
-                conf.classList.add("confetti");
-                conf.style.left = Math.random() * 100 + "vw";
-                conf.style.backgroundColor = Math.random() > 0.5 ? "#ff004f" : "#ff5fa2";
-                conf.style.animationDuration = (Math.random() * 3 + 2) + "s";
-                container.appendChild(conf);
-                setTimeout(() => { conf.remove(); }, 5000);
+        // =================================================================
+        // FINAL SCENE
+        // =================================================================
+        function finalScene() {
+            showSection("finalScene");
+
+            const text = `If one day...
+months from now...
+
+you randomly think of me —
+
+I hope you smile.
+
+Not because you regret anything.
+Not because you miss me painfully.
+
+But because you experienced something real.
+
+And real things
+don't fade.
+
+Goodbye...
+but never forgotten. ❤️`;
+
+            typeLetter(text, "finalText", 40);
+
+            document.body.style.transition = "background 3s ease";
+            document.body.style.background = "linear-gradient(180deg, #2b1c24, #1a1015)";
+        }
+
+        // =================================================================
+        // PROMPT MODAL SYSTEM
+        // =================================================================
+        let currentUnlockType = "";
+
+        function openPrompt(question, type) {
+            currentUnlockType = type;
+            document.getElementById("promptTitle").innerText = question;
+            document.getElementById("promptInput").value = "";
+
+            const modal = document.getElementById("customPrompt");
+            document.body.classList.add("prompt-open");
+
+            modal.style.display = "flex";
+            modal.style.opacity = "0";
+            setTimeout(() => modal.style.opacity = "1", 10);
+        }
+
+        function closePrompt() {
+            const modal = document.getElementById("customPrompt");
+            modal.style.opacity = "0";
+            document.body.classList.remove("prompt-open");
+            setTimeout(() => modal.style.display = "none", 400);
+        }
+
+        function submitPrompt() {
+            const answer = document.getElementById("promptInput").value.toLowerCase().trim();
+
+            if (currentUnlockType === "letter") {
+                if (answer === "instagram") {
+                    showSection("loveLetter");
+                    launchConfetti();
+
+                    const letterText = `My Love,
+
+Even if you're miles away...
+Even if the world shifts us in different directions...
+
+What I felt was real.
+And real things don't disappear just because distance exists.
+
+You changed me.
+You made me softer.
+You made me better.
+
+And wherever you go...
+A piece of my heart walks with you.
+
+Always. ❤️`;
+
+                    typeLetter(letterText, "typedLetter", 35);
+                    closePrompt();
+                } else {
+                    triggerErrorEffect();
+                    showError("Try again ❤️");
+                }
+            } else if (currentUnlockType === "message") {
+                if (answer === "my man") {
+                    showSection("message");
+                    launchConfetti();
+                    closePrompt();
+                } else {
+                    triggerErrorEffect();
+                    showError("Wrong answer, cutie 😘");
+                }
             }
         }
 
- let currentUnlockType = "";
-
-function openPrompt(question, type) {
-    currentUnlockType = type;
-    document.getElementById("promptTitle").innerText = question;
-    document.getElementById("promptInput").value = ""; 
-    
-    // Show modal without focusing input (keyboard stays hidden)
-    const modal = document.getElementById("customPrompt");
-    modal.style.display = "flex";
-    modal.style.opacity = "0";
-    setTimeout(() => { modal.style.opacity = "1"; }, 10);
-}
-
-function closePrompt() {
-    const modal = document.getElementById("customPrompt");
-    modal.style.opacity = "0";
-    setTimeout(() => { modal.style.display = "none"; }, 400);
-}
-
-// Custom Error Message Function
-function showError(message) {
-    const toast = document.getElementById("errorToast");
-    toast.innerText = message;
-    toast.classList.add("show");
-    
-    // Automatically hide after 2.5 seconds
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2500);
-}
-
-function submitPrompt() {
-    let answer = document.getElementById("promptInput").value.toLowerCase().trim();
-    
-    if (currentUnlockType === "letter") {
-        if (answer === "instagram") {
-            showSection("loveLetter");
-            launchConfetti();
-            closePrompt();
-        } else {
-            triggerErrorEffect();
-            showError("Try again ❤️"); // Custom error instead of alert
+        function unlockLoveLetter() {
+            openPrompt("Where did we first talk? 💖", "letter");
         }
-    } 
-    else if (currentUnlockType === "message") {
-        if (answer === "my man") {
-            showSection("message");
-            launchConfetti();
-            closePrompt();
-        } else {
-            triggerErrorEffect();
-            showError("Wrong answer, cutie 😘"); // Custom error instead of alert
-        }
-    }
-}
 
-function triggerErrorEffect() {
-            let inputField = document.getElementById("promptInput");
+        function unlockMessage() {
+            openPrompt("Who is the best boyfriend in the world? 💕", "message");
+        }
+
+        // =================================================================
+        // ERROR HANDLING
+        // =================================================================
+        function showError(message) {
+            const toast = document.getElementById("errorToast");
+            toast.innerText = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 2500);
+        }
+
+        function triggerErrorEffect() {
+            const inputField = document.getElementById("promptInput");
             inputField.classList.add("error-glow");
-            setTimeout(() => {
-                inputField.classList.remove("error-glow");
-            }, 500);
+            setTimeout(() => inputField.classList.remove("error-glow"), 500);
         }
 
-// Update your button clicks to use the new prompt
-function unlockLoveLetter() {
-    openPrompt("Where did we first talk? 💖 Awnser: instagram", "letter");
-}
+        // =================================================================
+        // VOICE PLAYER
+        // =================================================================
+        function playVoice() {
+            document.getElementById("voiceMessage").play();
+        }
 
-function unlockMessage() {
-    openPrompt("Who is the best boyfriend in the world? 💕 Awnser my man", "message");
-}
+        // =================================================================
+        // 3D CARD TILT EFFECT
+        // =================================================================
+        document.addEventListener("mousemove", (e) => {
+            if (!document.body.classList.contains("prompt-open")) {
+                const card = document.querySelector(".card");
+                const x = (window.innerWidth / 2 - e.clientX) / 30;
+                const y = (window.innerHeight / 2 - e.clientY) / 30;
+                card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+            }
+        });
 
-// Allow "Enter" key to submit the prompt
-document.getElementById("promptInput").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        submitPrompt();
-    }
-});
+        // =================================================================
+        // ENTER KEY SUPPORT
+        // =================================================================
+        document.getElementById("promptInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                submitPrompt();
+            }
+        });
 
-        function playVoice() { document.getElementById("voiceMessage").play(); }
+        // =================================================================
+        // INITIALIZATION
+        // =================================================================
+        window.onload = function() {
+            updateTime();
+            setInterval(createHeart, CONFIG.heartInterval);
+        };
     </script>
-
-    <div id="errorToast">Try again, cutie ❤️</div>
-
-    <div id="customPrompt">
-        <div class="prompt-content">
-            <h2 id="promptTitle">Question</h2>
-            <input type="text" id="promptInput" placeholder="Tap here to type...">
-            <div class="prompt-btns">
-                <button class="animated-btn" style="margin:0; width: auto;" onclick="submitPrompt()">Submit</button>
-                <button class="animated-btn" style="margin:0; width: auto; background: #7a2c4d;" onclick="closePrompt()">Cancel</button>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
-
