@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>My Valentine 💖</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#fef5f8">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Dancing+Script:wght@600&family=Caveat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -111,7 +114,7 @@
             <input type="text" id="promptInput" placeholder="Tap here to type...">
             <div class="prompt-btns">
                 <button class="animated-btn" onclick="submitPrompt()">Submit</button>
-                <button class="animated-btn" style="background: #7a2c4d;" onclick="closePrompt()">Cancel</button>
+                <button class="animated-btn" style="background: linear-gradient(180deg, #8b3456 0%, #7a2c4d 100%); color: white; border: none;" onclick="closePrompt()">Cancel</button>
             </div>
         </div>
     </div>
@@ -406,17 +409,7 @@ Always. ❤️`;
             document.getElementById("voiceMessage").play();
         }
 
-        // =================================================================
-        // 3D CARD TILT EFFECT
-        // =================================================================
-        document.addEventListener("mousemove", (e) => {
-            if (!document.body.classList.contains("prompt-open")) {
-                const card = document.querySelector(".card");
-                const x = (window.innerWidth / 2 - e.clientX) / 30;
-                const y = (window.innerHeight / 2 - e.clientY) / 30;
-                card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-            }
-        });
+        // 3D card tilt removed for better mobile performance
 
         // =================================================================
         // ENTER KEY SUPPORT
