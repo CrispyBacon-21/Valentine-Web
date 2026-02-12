@@ -9,30 +9,38 @@
 
 body {
     margin: 0;
-    font-family: 'Playfair Display', serif;
-    background: linear-gradient(180deg, #fdf7f9 0%, #f4e8ee 50%, #f0dde6 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Playfair Display', serif;
+    background: linear-gradient(180deg, #fef5f8 0%, #fdeef4 50%, #fce4ed 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
     color: #c94f7c;
-    font-family: 'Dancing Script', cursive;
-    font-size: 38px;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Dancing Script', cursive;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin: 0 0 10px 0;
 }
 
 img {
     width: 100%;
-    border-radius: 7.5px;
-    margin-bottom: 12px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 /* ==========================================================================
-   2. TEXT STYLES & COLORS
+   2. TEXT STYLES & COLORS - iOS Premium Typography
    ========================================================================== */
 .intro,
 .textsConfig,
@@ -44,172 +52,209 @@ img {
 
 .intro {
     margin-bottom: 20px;
+    font-size: 17px;
+    line-height: 1.5;
+    font-weight: 400;
 }
 
 .textsConfig {
     margin-bottom: 10px;
+    font-size: 16px;
+    opacity: 0.8;
 }
 
 #timeTogether {
-    font-size: 16px;
-    margin: 15px 0;
+    font-size: 15px;
+    margin: 20px 0;
+    font-weight: 500;
+    opacity: 0.9;
 }
 
 .love-note {
-    font-size: 24px;
-    font-family: 'Dancing Script', cursive;
-    line-height: 1.5;
+    font-size: 22px;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Dancing Script', cursive;
+    line-height: 1.6;
     color: #7a2c4d;
+    font-weight: 500;
 }
 
 .glow-text {
-    text-shadow: 0 0 15px rgba(242, 34, 121, 0.808);
+    text-shadow: 0 0 20px rgba(242, 34, 121, 0.3);
 }
 
 .letter-box {
-    background: #fff8f6;
-    padding: 15px;
-    border-radius: 7.5px;
+    background: rgba(255, 248, 246, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 24px;
+    border-radius: 16px;
     color: #7a2c4d;
-    box-shadow: 0 0 25px rgba(201, 79, 124, 0.2);
+    box-shadow: 
+        0 10px 40px rgba(201, 79, 124, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
     font-family: 'Caveat', cursive;
-    font-size: 22px;
-    line-height: 1.5;
+    font-size: 20px;
+    line-height: 1.6;
 }
 
 .sweet-box {
-    background: #fff8f6;
-    padding: 15px;
-    border-radius: 7.5px;
+    background: rgba(255, 248, 246, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 24px;
+    border-radius: 16px;
     color: #7a2c4d;
-    box-shadow: 0 0 25px rgba(201, 79, 124, 0.2);
+    box-shadow: 
+        0 10px 40px rgba(201, 79, 124, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
 }
 
 /* ==========================================================================
-   3. INTRO SCREEN
+   3. INTRO SCREEN - iOS Premium
    ========================================================================== */
 #introScreen {
     position: fixed;
     inset: 0;
-    background: linear-gradient(to bottom, #fff8f6, #fce6ef);
+    background: linear-gradient(135deg, #fff9fc 0%, #fcedf4 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 4;
     text-align: center;
+    padding: 20px;
 }
 
 /* ==========================================================================
-   4. MAIN CARD
+   4. MAIN CARD - Premium iOS Style
    ========================================================================== */
 .card {
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 35px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    padding: 40px 30px;
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
     max-width: 420px;
     width: 92%;
-    border-radius: 7.5px;
+    border-radius: 20px;
+    border: 0.5px solid rgba(255, 255, 255, 0.8);
     box-shadow: 
-        0 40px 80px rgba(122, 44, 77, 0.12),
-        0 10px 30px rgba(122, 44, 77, 0.08);
+        0 25px 50px -12px rgba(122, 44, 77, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.3) inset;
     text-align: center;
     position: relative;
     z-index: 2;
-    transform-style: preserve-3d;
-    transition: transform 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow:
-        0 60px 120px rgba(122, 44, 77, 0.15),
-        0 20px 40px rgba(122, 44, 77, 0.1);
+.card:active {
+    transform: scale(0.98);
 }
 
-/* Disable card animations when prompt is open */
+/* Disable card interactions when prompt is open */
 body.prompt-open .card {
     pointer-events: none;
 }
 
-body.prompt-open .card:hover {
-    transform: none;
-}
-
 /* ==========================================================================
-   5. BUTTONS
+   5. BUTTONS - Premium iOS Style
    ========================================================================== */
 
 /* Primary Buttons (Enter & Back) */
 #enterBtn,  
 #backBtn {
-    padding: 14px 30px;
+    padding: 16px 32px;
     border: none;
-    border-radius: 50px;
-    background: #d05481;
-    box-shadow: 0 8px 20px rgba(208, 84, 129, 0.4);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #e56a92 0%, #d05481 100%);
+    box-shadow: 
+        0 4px 15px rgba(208, 84, 129, 0.3),
+        0 1px 3px rgba(208, 84, 129, 0.2);
     color: white;
     font-size: 17px;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    letter-spacing: -0.2px;
+}
+
+#enterBtn:active,
+#backBtn:active {
+    transform: scale(0.96);
+    box-shadow: 
+        0 2px 8px rgba(208, 84, 129, 0.3),
+        0 1px 2px rgba(208, 84, 129, 0.2);
 }
 
 #backBtn {
     position: fixed;
-    bottom: 30px;
+    bottom: max(30px, env(safe-area-inset-bottom, 30px));
     right: 20px;
     display: none;
     z-index: 9999;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 12px 24px;
+    font-size: 15px;
 }
 
 /* iOS-Style Glass Buttons */
 .animated-btn {
     width: 100%;
-    margin: 10px 0;
+    margin: 8px 0;
     padding: 16px 0;
-    background: rgba(255, 255, 255, 0.6); 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.7); 
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 0.5px solid rgba(255, 255, 255, 0.8);
+    border-radius: 14px;
     color: #9c3b61;
     font-size: 16px;
     font-weight: 600;
-    letter-spacing: 0.3px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: all 0.2s ease;
+    letter-spacing: -0.2px;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
 }
 
-.animated-btn:hover {
-    background: rgba(255, 255, 255, 0.85);
-    transform: scale(1.02);
-    box-shadow: 0 8px 25px rgba(208, 84, 129, 0.15);
-}
-
 .animated-btn:active {
-    transform: scale(0.96);
-    background: rgba(230, 230, 230, 0.8);
+    transform: scale(0.97);
+    background: rgba(240, 240, 245, 0.8);
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.3) inset;
 }
 
 /* Voice Button */
 .voice-btn {
     margin-top: 20px;
-    padding: 12px 24px;
+    padding: 14px 28px;
     border: none;
-    border-radius: 50px;
-    background: #7a2c4d;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #8b3456 0%, #7a2c4d 100%);
     color: white;
-    font-weight: bold;
-    box-shadow: 0 5px 15px rgba(122, 44, 77, 0.3);
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    box-shadow: 
+        0 4px 15px rgba(122, 44, 77, 0.3),
+        0 1px 3px rgba(122, 44, 77, 0.2);
     cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.voice-btn:active {
+    transform: scale(0.96);
+    box-shadow: 
+        0 2px 8px rgba(122, 44, 77, 0.3),
+        0 1px 2px rgba(122, 44, 77, 0.2);
 }
 
 /* ==========================================================================
-   6. SECTIONS & ANIMATIONS
+   6. SECTIONS & ANIMATIONS - iOS Smooth Transitions
    ========================================================================== */
 .hidden {
     display: none;
@@ -217,9 +262,9 @@ body.prompt-open .card:hover {
 
 .section {
     opacity: 0;
-    transform: translateY(30px) scale(0.98);
-    filter: blur(5px);
-    transition: all 0.8s cubic-bezier(.19, 1, .22, 1);
+    transform: translateY(20px) scale(0.98);
+    filter: blur(0);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .section.show {
@@ -315,7 +360,7 @@ body.prompt-open .card:hover {
 
 @keyframes iosPop {
     0% { 
-        transform: scale(0.8); 
+        transform: scale(0.85); 
         opacity: 0; 
     }
     100% { 
@@ -334,7 +379,7 @@ body.prompt-open .card:hover {
 }
 
 /* ==========================================================================
-   9. CUSTOM PROMPT MODAL
+   9. CUSTOM PROMPT MODAL - iOS Premium Style
    ========================================================================== */
 #customPrompt {
     display: none;
@@ -345,68 +390,82 @@ body.prompt-open .card:hover {
     bottom: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    background: rgba(30, 10, 20, 0.7) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
+    background: rgba(30, 10, 20, 0.6) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
     justify-content: center !important;
     align-items: center !important;
     z-index: 999999 !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .prompt-content {
     transform: none !important; 
     position: relative !important;
-    background: white !important;
-    padding: 30px 20px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(40px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+    padding: 32px 24px !important;
     border-radius: 20px !important;
     width: 85% !important;
-    max-width: 300px !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+    max-width: 320px !important;
+    border: 0.5px solid rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.5) inset !important;
     text-align: center !important;
-    animation: iosPop 0.3s cubic-bezier(0.4, 0, 0.2, 1.5);
+    animation: iosPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 1000000 !important;
 }
 
 .prompt-content h2 {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
     margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 20px;
+    margin-bottom: 24px;
+    font-size: 22px;
+    letter-spacing: -0.5px;
 }
 
 /* iOS-Style Input Field */
 #promptInput {
     width: 100%;
-    padding: 12px 0;
-    margin-bottom: 20px;
-    background: #F2F2F7;
-    border: 1px solid transparent;
-    border-radius: 10px;
-    font-size: 16px;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+    background: rgba(242, 242, 247, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    font-size: 17px;
     text-align: center;
     color: #333;
     outline: none;
     box-sizing: border-box;
-    transition: all 0.3s;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #promptInput:focus {
-    background: #fff;
-    border: 1px solid #d05481;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid #d05481;
     box-shadow: 0 0 0 4px rgba(208, 84, 129, 0.1);
+}
+
+#promptInput::placeholder {
+    color: rgba(60, 60, 67, 0.3);
 }
 
 /* Error Effect */
 #promptInput.error-glow {
-    border: 2px solid #ff4d4d !important;
-    box-shadow: 0 0 15px rgba(255, 77, 77, 0.6);
-    transform: translateX(5px);
-    transition: all 0.1s ease;
+    border: 1.5px solid #ff3b30 !important;
+    box-shadow: 0 0 0 4px rgba(255, 59, 48, 0.1);
+    animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
 }
 
 /* Modal Buttons Container */
@@ -419,33 +478,44 @@ body.prompt-open .card:hover {
 .prompt-btns button {
     flex: 1;
     border-radius: 12px;
-    padding: 12px 0;
-    font-size: 16px;
+    padding: 14px 0;
+    font-size: 17px;
     margin: 0;
-    box-shadow: none;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    font-weight: 600;
+    letter-spacing: -0.2px;
 }
 
 /* ==========================================================================
-   10. ERROR TOAST NOTIFICATION
+   10. ERROR TOAST NOTIFICATION - iOS Premium Style
    ========================================================================== */
 #errorToast {
     position: fixed;
     top: -100px;
     left: 50%;
     transform: translateX(-50%);
-    background: #7a2c4d;
+    background: rgba(122, 44, 77, 0.95);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     color: white;
-    padding: 12px 25px;
-    border-radius: 7.5px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
     z-index: 1000000;
     font-style: normal;
     font-size: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 0;
 }
 
 #errorToast.show {
-    top: 40px;
+    top: 50px;
     opacity: 1;
 }
