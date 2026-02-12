@@ -1,18 +1,22 @@
 /* ==========================================================================
-   1. GLOBAL STYLES & BASE
+   VALENTINE'S DAY WEBSITE - OPTIMIZED & ORGANIZED STYLES
    ========================================================================== */
 
+/* ==========================================================================
+   1. FONTS & GLOBAL STYLES
+   ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+
 body {
     margin: 0;
     font-family: 'Playfair Display', serif;
-    background: linear-gradient(to bottom, #fff8f6, #fce6ef);
+    background: linear-gradient(180deg, #fdf7f9 0%, #f4e8ee 50%, #f0dde6 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     overflow-x: hidden;
-    animation: softPulse 8s infinite alternate;
+    scroll-behavior: smooth;
 }
 
 h1 {
@@ -28,128 +32,27 @@ img {
 }
 
 /* ==========================================================================
-   2. INTRO & OVERLAY SCREENS
+   2. TEXT STYLES & COLORS
    ========================================================================== */
-#introScreen {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(to bottom, #fff8f6, #fce6ef);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 4;
-    text-align: center;
-}
-
-.textsConfig {
-    color: #7f7f7f;
-    margin-bottom: 10px;
+.intro,
+.textsConfig,
+#timeTogether,
+.prompt-content h2 {
+    color: #7a2c4d;
     font-style: italic;
 }
 
 .intro {
-    color: #7a2c4d;
     margin-bottom: 20px;
-    font-style: italic;
 }
 
-/* ==========================================================================
-   3. THE CARD CONTAINER
-   ========================================================================== */
-.card {
-    background: white;
-    opacity: 0.85;
-    padding: 25px;
-    max-width: 400px;
-    width: 90%;
-    border-radius: 7.5px;
-    box-shadow: 0 10px 35px rgba(122, 44, 77, 0.15);
-    text-align: center;
-    position: relative;
-    z-index: 2;
+.textsConfig {
+    margin-bottom: 10px;
 }
 
-/* ==========================================================================
-   4. BUTTON STYLES
-   ========================================================================== */
-#enterBtn, 
-.animated-btn, 
-#backBtn {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 7.5px;
-    background: #d05481;
-    box-shadow: 0 0 25px rgba(201, 79, 124, 0.2);
-    color: white;
+#timeTogether {
     font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.animated-btn {
-    width: 100%;
-    margin: 10px 0;
-    background: linear-gradient(165deg, #d05481, #e36291);
-}
-
-.animated-btn:hover {
-   background:linear-gradient(165deg,#c14d77,#d85b86);
-}
-
-.animated-btn:active {
-    transform: scale(0.95);
-}
-
-.voice-btn {
-    margin-top: 20px;
-    padding: 10px;
-    border: none;
-    border-radius: 7.5px;
-    background: #7a2c4d;
-    color: white;
-    cursor: pointer;
-}
-
-#backBtn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    z-index: 3;
-}
-
-/* ==========================================================================
-   5. CONTENT SECTIONS & TYPOGRAPHY
-   ========================================================================== */
-.section {
-    opacity: 0;
-    transform: translateY(15px);
-    transition: all 0.6s ease;
-}
-
-.section.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.hidden {
-    display: none;
-}
-
-.letter-box, 
-.sweet-box {
-    background: #fff8f6;
-    padding: 15px;
-    border-radius: 7.5px;
-    color: #7a2c4d;
-    box-shadow: 0 0 25px rgba(201, 79, 124, 0.2);
-}
-
-.letter-box {
-    font-family: 'Caveat', cursive;
-    font-size: 22px;
-    line-height: 1.5;
+    margin: 15px 0;
 }
 
 .love-note {
@@ -163,12 +66,176 @@ img {
     text-shadow: 0 0 15px rgba(242, 34, 121, 0.808);
 }
 
+.letter-box {
+    background: #fff8f6;
+    padding: 15px;
+    border-radius: 7.5px;
+    color: #7a2c4d;
+    box-shadow: 0 0 25px rgba(201, 79, 124, 0.2);
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    line-height: 1.5;
+}
+
+.sweet-box {
+    background: #fff8f6;
+    padding: 15px;
+    border-radius: 7.5px;
+    color: #7a2c4d;
+    box-shadow: 0 0 25px rgba(201, 79, 124, 0.2);
+}
+
 /* ==========================================================================
-   6. VISUAL EFFECTS (Hearts & Confetti)
+   3. INTRO SCREEN
    ========================================================================== */
+#introScreen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to bottom, #fff8f6, #fce6ef);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+    text-align: center;
+}
+
+/* ==========================================================================
+   4. MAIN CARD
+   ========================================================================== */
+.card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 35px;
+    max-width: 420px;
+    width: 92%;
+    border-radius: 7.5px;
+    box-shadow: 
+        0 40px 80px rgba(122, 44, 77, 0.12),
+        0 10px 30px rgba(122, 44, 77, 0.08);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 60px 120px rgba(122, 44, 77, 0.15),
+        0 20px 40px rgba(122, 44, 77, 0.1);
+}
+
+/* Disable card animations when prompt is open */
+body.prompt-open .card {
+    pointer-events: none;
+}
+
+body.prompt-open .card:hover {
+    transform: none;
+}
+
+/* ==========================================================================
+   5. BUTTONS
+   ========================================================================== */
+
+/* Primary Buttons (Enter & Back) */
+#enterBtn,  
+#backBtn {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 50px;
+    background: #d05481;
+    box-shadow: 0 8px 20px rgba(208, 84, 129, 0.4);
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+#backBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    display: none;
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+}
+
+/* iOS-Style Glass Buttons */
+.animated-btn {
+    width: 100%;
+    margin: 10px 0;
+    padding: 16px 0;
+    background: rgba(255, 255, 255, 0.6); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 25px;
+    color: #9c3b61;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.animated-btn:hover {
+    background: rgba(255, 255, 255, 0.85);
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(208, 84, 129, 0.15);
+}
+
+.animated-btn:active {
+    transform: scale(0.96);
+    background: rgba(230, 230, 230, 0.8);
+}
+
+/* Voice Button */
+.voice-btn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    background: #7a2c4d;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(122, 44, 77, 0.3);
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   6. SECTIONS & ANIMATIONS
+   ========================================================================== */
+.hidden {
+    display: none;
+}
+
+.section {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    filter: blur(5px);
+    transition: all 0.8s cubic-bezier(.19, 1, .22, 1);
+}
+
+.section.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+/* ==========================================================================
+   7. VISUAL EFFECTS - Hearts & Confetti
+   ========================================================================== */
+
+/* Falling Hearts Container */
 .hearts {
     position: fixed;
-    opacity: .6;
+    opacity: 0.6;
     top: 0;
     left: 0;
     width: 100%;
@@ -177,7 +244,7 @@ img {
     z-index: 5;
 }
 
-/* 1. The wrapper handles the vertical fall */
+/* Heart Animation Wrappers */
 .heart-wrapper {
     position: fixed;
     top: -100px;
@@ -186,13 +253,12 @@ img {
     animation: fall linear forwards;
 }
 
-/* 2. The image inside handles the side-to-side shake */
 .heart-img {
     display: block;
     animation: sway ease-in-out infinite alternate;
 }
 
-/* Heart Burst Style */
+/* Heart Burst Effect */
 .burst-heart {
     position: fixed;
     top: 50%;
@@ -202,6 +268,7 @@ img {
     animation: heartBurst 1.2s ease-out forwards;
 }
 
+/* Confetti */
 .confetti {
     position: fixed;
     top: -10px;
@@ -212,20 +279,21 @@ img {
 }
 
 /* ==========================================================================
-   7. ANIMATIONS
+   8. KEYFRAME ANIMATIONS
    ========================================================================== */
-@keyframes softPulse {
-    0%   { background-color: #fff8f6; }
-    100% { background-color: #fdeaf2; }
-}
-
 @keyframes fall {
-    to { transform: translateY(115vh); }
+    to { 
+        transform: translateY(115vh); 
+    }
 }
 
 @keyframes sway {
-    0% { transform: translateX(-15px) rotate(-10deg); }
-    100% { transform: translateX(15px) rotate(10deg); }
+    0% { 
+        transform: translateX(-15px) rotate(-10deg); 
+    }
+    100% { 
+        transform: translateX(15px) rotate(10deg); 
+    }
 }
 
 @keyframes heartBurst {
@@ -233,7 +301,6 @@ img {
         transform: translate(-50%, -50%) scale(0);
     }
     100% {
-        /* This moves hearts outward in a circle */
         transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--rot));
         opacity: 0;
     }
@@ -246,91 +313,139 @@ img {
     }
 }
 
+@keyframes iosPop {
+    0% { 
+        transform: scale(0.8); 
+        opacity: 0; 
+    }
+    100% { 
+        transform: scale(1); 
+        opacity: 1; 
+    }
+}
+
+@keyframes softPulse {
+    0% { 
+        background-color: #fff8f6; 
+    }
+    100% { 
+        background-color: #fdeaf2; 
+    }
+}
+
 /* ==========================================================================
-   8. CUSTOM PROMPT MODAL
+   9. CUSTOM PROMPT MODAL
    ========================================================================== */
 #customPrompt {
-    display: none; /* Hidden by default */
-    position: fixed;
-    inset: 0;
-    background: rgba(122, 44, 77, 0.4); /* Dimmed background */
-    backdrop-filter: blur(5px);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(30, 10, 20, 0.7) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 999999 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    transition: opacity 0.4s ease;
 }
 
 .prompt-content {
-    background: white;
-    background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('Images/background.jpg'); /* ADD YOUR IMAGE HERE */
-    background-size: cover;
-    background-position: center;
-    padding: 30px;
-    border-radius: 15px;
-    width: 85%;
-    max-width: 350px;
-    text-align: center;
-    box-shadow: 0 15px 45px rgba(0,0,0,0.2);
-    border: 2px solid #d05481;
+    transform: none !important; 
+    position: relative !important;
+    background: white !important;
+    padding: 30px 20px !important;
+    border-radius: 20px !important;
+    width: 85% !important;
+    max-width: 300px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+    text-align: center !important;
+    animation: iosPop 0.3s cubic-bezier(0.4, 0, 0.2, 1.5);
+    z-index: 1000000 !important;
 }
 
 .prompt-content h2 {
-    font-family: 'Dancing Script', cursive;
-    color: #7a2c4d;
-    margin-bottom: 15px;
-}
-
-#promptInput {
-    width: 90%;
-    padding: 10px;
-    border-radius: 7.5px;
-    border: 1px solid #d05481;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    margin-top: 0;
     margin-bottom: 20px;
-    outline: none;
+    font-size: 20px;
 }
 
+/* iOS-Style Input Field */
+#promptInput {
+    width: 100%;
+    padding: 12px 0;
+    margin-bottom: 20px;
+    background: #F2F2F7;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.3s;
+}
+
+#promptInput:focus {
+    background: #fff;
+    border: 1px solid #d05481;
+    box-shadow: 0 0 0 4px rgba(208, 84, 129, 0.1);
+}
+
+/* Error Effect */
+#promptInput.error-glow {
+    border: 2px solid #ff4d4d !important;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.6);
+    transform: translateX(5px);
+    transition: all 0.1s ease;
+}
+
+/* Modal Buttons Container */
 .prompt-btns {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     justify-content: center;
 }
 
-/* Adjusting the input text size for better reading */
-#promptInput { font-size: 16px; }
+.prompt-btns button {
+    flex: 1;
+    border-radius: 12px;
+    padding: 12px 0;
+    font-size: 16px;
+    margin: 0;
+    box-shadow: none;
+}
 
-/* Custom Error Notification (Toast) */
+/* ==========================================================================
+   10. ERROR TOAST NOTIFICATION
+   ========================================================================== */
 #errorToast {
     position: fixed;
-    top: -100px; /* Hidden above screen */
+    top: -100px;
     left: 50%;
     transform: translateX(-50%);
     background: #7a2c4d;
     color: white;
     padding: 12px 25px;
     border-radius: 7.5px;
-    z-index: 3000; /* Above the prompt */
+    z-index: 1000000;
     font-style: normal;
     font-size: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
     opacity: 0;
 }
 
 #errorToast.show {
-    top: 40px; /* Slips down into view */
+    top: 40px;
     opacity: 1;
-}
-
-/* Modal Fade-in */
-#customPrompt {
-    display: none;
-    transition: opacity 0.4s ease;
-}
-
-/* Red glow effect for wrong answers */
-.error-glow {
-    border: 2px solid #ff4d4d !important;
-    box-shadow: 0 0 15px rgba(255, 77, 77, 0.6);
-    transform: translateX(5px); /* Tiny shake effect */
-    transition: all 0.1s ease;
 }
